@@ -6,6 +6,7 @@
 #include <QtSql/QSqlDatabase>
 #include <QtSql/QtSql>
 #include <QFileInfo>
+#include <QMessageBox>
 
 namespace Ui {
 class MainWindow;
@@ -24,6 +25,12 @@ private:
     QSqlDatabase myDB;
 
     bool connectDB(QString pathToDB);
+
+private slots:
+    void saveInfo();
+    void clearForm();
+    void help();
+    void programInfo();
 };
 
 #endif // MAINWINDOW_H
