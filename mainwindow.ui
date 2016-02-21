@@ -1,0 +1,764 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>745</width>
+    <height>584</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralWidget">
+   <layout class="QVBoxLayout" name="verticalLayout_3">
+    <item>
+     <widget class="QScrollArea" name="scrollArea">
+      <property name="widgetResizable">
+       <bool>true</bool>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+      </property>
+      <widget class="QWidget" name="scrollAreaWidgetContents">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>-46</y>
+         <width>708</width>
+         <height>318</height>
+        </rect>
+       </property>
+       <layout class="QHBoxLayout" name="horizontalLayout_2">
+        <item>
+         <layout class="QVBoxLayout" name="verticalLayout">
+          <property name="leftMargin">
+           <number>0</number>
+          </property>
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <property name="rightMargin">
+           <number>10</number>
+          </property>
+          <property name="bottomMargin">
+           <number>0</number>
+          </property>
+          <item>
+           <widget class="QLabel" name="label">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="font">
+             <font>
+              <weight>75</weight>
+              <bold>true</bold>
+             </font>
+            </property>
+            <property name="text">
+             <string>Основная информация</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <layout class="QGridLayout" name="gridLayout">
+            <item row="5" column="1">
+             <widget class="QComboBox" name="comboBox_2">
+              <item>
+               <property name="text">
+                <string/>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Жен</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Муж</string>
+               </property>
+              </item>
+             </widget>
+            </item>
+            <item row="2" column="1">
+             <widget class="QLineEdit" name="lineEdit_3"/>
+            </item>
+            <item row="5" column="0">
+             <widget class="QLabel" name="label_7">
+              <property name="text">
+               <string>Пол *</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="0">
+             <widget class="QLabel" name="label_2">
+              <property name="text">
+               <string>Фамилия *</string>
+              </property>
+             </widget>
+            </item>
+            <item row="4" column="1">
+             <widget class="QLineEdit" name="lineEdit_4"/>
+            </item>
+            <item row="4" column="0">
+             <widget class="QLabel" name="label_6">
+              <property name="text">
+               <string>Номер документа *</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="0">
+             <widget class="QLabel" name="label_4">
+              <property name="text">
+               <string>Отчество</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="1">
+             <widget class="QLineEdit" name="lineEdit"/>
+            </item>
+            <item row="3" column="0">
+             <widget class="QLabel" name="label_5">
+              <property name="text">
+               <string>Тип документа *</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="0">
+             <widget class="QLabel" name="label_3">
+              <property name="text">
+               <string>Имя *</string>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="1">
+             <widget class="QComboBox" name="comboBox">
+              <item>
+               <property name="text">
+                <string/>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Свидетельство о рождении</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Паспорт</string>
+               </property>
+              </item>
+             </widget>
+            </item>
+            <item row="1" column="1">
+             <widget class="QLineEdit" name="lineEdit_2"/>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <widget class="QLabel" name="label_8">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="text">
+             <string>Дата рождения</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout">
+            <property name="spacing">
+             <number>6</number>
+            </property>
+            <property name="leftMargin">
+             <number>0</number>
+            </property>
+            <property name="topMargin">
+             <number>0</number>
+            </property>
+            <property name="rightMargin">
+             <number>0</number>
+            </property>
+            <property name="bottomMargin">
+             <number>0</number>
+            </property>
+            <item>
+             <widget class="QLabel" name="label_9">
+              <property name="text">
+               <string>День:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QComboBox" name="comboBox_3">
+              <item>
+               <property name="text">
+                <string/>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>1</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>2</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>3</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>4</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>5</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>6</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>7</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>8</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>9</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>10</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>11</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>12</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>13</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>14</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>15</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>16</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>17</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>18</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>19</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>20</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>21</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>22</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>23</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>24</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>25</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>26</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>27</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>28</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>29</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>30</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>31</string>
+               </property>
+              </item>
+             </widget>
+            </item>
+            <item>
+             <spacer name="horizontalSpacer">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>10</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item>
+             <widget class="QLabel" name="label_10">
+              <property name="text">
+               <string>Месяц:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QComboBox" name="comboBox_4">
+              <item>
+               <property name="text">
+                <string/>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>1</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>2</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>3</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>4</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>5</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>6</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>7</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>8</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>9</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>10</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>11</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>12</string>
+               </property>
+              </item>
+             </widget>
+            </item>
+            <item>
+             <spacer name="horizontalSpacer_2">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>10</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item>
+             <widget class="QLabel" name="label_11">
+              <property name="text">
+               <string>Год:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QSpinBox" name="spinBox">
+              <property name="minimum">
+               <number>1990</number>
+              </property>
+              <property name="maximum">
+               <number>2100</number>
+              </property>
+              <property name="value">
+               <number>2000</number>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <spacer name="horizontalSpacer_3">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>10</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <layout class="QFormLayout" name="formLayout_2">
+            <item row="0" column="0">
+             <widget class="QLabel" name="label_18">
+              <property name="text">
+               <string>Район школы</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="0">
+             <widget class="QLabel" name="label_19">
+              <property name="text">
+               <string>Школа</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="0">
+             <widget class="QLabel" name="label_20">
+              <property name="text">
+               <string>Класс</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="1">
+             <widget class="QLineEdit" name="lineEdit_7"/>
+            </item>
+            <item row="1" column="1">
+             <widget class="QLineEdit" name="lineEdit_8"/>
+            </item>
+            <item row="2" column="1">
+             <widget class="QLineEdit" name="lineEdit_9"/>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QVBoxLayout" name="verticalLayout_2">
+          <property name="leftMargin">
+           <number>0</number>
+          </property>
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <property name="rightMargin">
+           <number>10</number>
+          </property>
+          <property name="bottomMargin">
+           <number>0</number>
+          </property>
+          <item>
+           <widget class="QLabel" name="label_12">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="font">
+             <font>
+              <weight>75</weight>
+              <bold>true</bold>
+             </font>
+            </property>
+            <property name="text">
+             <string>Контактная информация</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="label_13">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Maximum">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="text">
+             <string>Родители</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QTextEdit" name="textEdit">
+            <property name="maximumSize">
+             <size>
+              <width>16777215</width>
+              <height>80</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="label_14">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="text">
+             <string>Домашний адрес</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QTextEdit" name="textEdit_2">
+            <property name="maximumSize">
+             <size>
+              <width>16777215</width>
+              <height>80</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <layout class="QFormLayout" name="formLayout">
+            <property name="leftMargin">
+             <number>0</number>
+            </property>
+            <property name="topMargin">
+             <number>0</number>
+            </property>
+            <property name="rightMargin">
+             <number>0</number>
+            </property>
+            <property name="bottomMargin">
+             <number>0</number>
+            </property>
+            <item row="0" column="0">
+             <widget class="QLabel" name="label_16">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="text">
+               <string>Телефон</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="1">
+             <widget class="QLineEdit" name="lineEdit_5"/>
+            </item>
+            <item row="1" column="0">
+             <widget class="QLabel" name="label_17">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="text">
+               <string>e-mail</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="1">
+             <widget class="QLineEdit" name="lineEdit_6"/>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </widget>
+     </widget>
+    </item>
+    <item>
+     <widget class="QLabel" name="label_21">
+      <property name="font">
+       <font>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="text">
+       <string>Выбранные объединения</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QLabel" name="label_22">
+      <property name="text">
+       <string>Перечислите выбранные объединения (по одному в строку)</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QTextEdit" name="textEdit_3">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>16777215</width>
+        <height>200</height>
+       </size>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QLabel" name="label_15">
+      <property name="text">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Обратите внимание!&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Поля, отмеченные символом *, обязательны для заполнения.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <spacer name="verticalSpacer_2">
+      <property name="orientation">
+       <enum>Qt::Vertical</enum>
+      </property>
+      <property name="sizeType">
+       <enum>QSizePolicy::Minimum</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>20</width>
+        <height>5</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
+    <item>
+     <widget class="Line" name="line">
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QLabel" name="lblStatus">
+      <property name="font">
+       <font>
+        <pointsize>7</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QToolBar" name="mainToolBar">
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+  </widget>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <resources/>
+ <connections/>
+</ui>
