@@ -7,6 +7,8 @@
 #include <QtSql/QtSql>
 #include <QFileInfo>
 #include <QMessageBox>
+#include <QRegularExpression>
+#include <QRegularExpressionMatch>
 
 namespace Ui {
 class MainWindow;
@@ -24,7 +26,11 @@ private:
     Ui::MainWindow *ui;
     QSqlDatabase myDB;
 
+    QRegularExpression *names;
+    QRegularExpression *words;
+
     bool connectDB(QString pathToDB);
+    void cleaner();
 
 private slots:
     void saveInfo();
