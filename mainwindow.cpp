@@ -142,6 +142,7 @@ void MainWindow::saveInfo()
             return;
         }
 
+        QString birthday = bday + "." + bmon + "." + byear;
 
         // Создаём окно, запрашивающее подтверждение действия
         QMessageBox messageBox(QMessageBox::Question,
@@ -156,7 +157,7 @@ void MainWindow::saveInfo()
         // Если действие подтверждено
         if (messageBox.exec() == QMessageBox::Yes)
         {
-            strQuery = "INSERT INTO Учащийся (";
+            QString strQuery = "INSERT INTO Учащийся (";
             strQuery.append("'Фамилия', 'Имя', 'Отчество', 'Тип документа', 'Номер документа', 'Пол', 'Год рождения', ");
             strQuery.append("'Район школы', 'Школа', 'Класс', 'Родители', 'Домашний адрес', 'Телефон', 'e-mail') VALUES ('");
             strQuery.append(surname + "', '" + name  + "', '" + patrname  + "', '" + docType  + "', '" + docNum  + "', '" + gender  + "', '" + birthday  + "', '");
