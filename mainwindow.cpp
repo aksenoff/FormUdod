@@ -165,6 +165,20 @@ void MainWindow::saveInfo()
 
             QSqlQuery query;
             query.exec(strQuery);
+            strQuery.clear();
+
+            QStringList qsl = courses.split("/n", QString::SkipEmptyParts);
+            for (QString & newCours : qsl)
+            {
+                newCours = newCours.trimmed(); // обрезаем лишние пробелы
+                if (!newCours.isEmpty())
+                {
+                    strQuery.append("INSERT INTO Запись ('Тип документа', 'Номер документа', 'Объединение') VALUES ('");
+                    strQuery.append(docType  + "', '" + docNum  + "', '" + newCours + "');");
+                    query.exec(strQuery);
+                    strQuery.clear();
+                }
+            }
 
             cleaner();
         }

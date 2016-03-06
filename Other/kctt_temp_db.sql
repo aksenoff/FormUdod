@@ -4,7 +4,6 @@ DROP TABLE IF EXISTS Учащийся;
 
 CREATE TABLE Учащийся (
 -- Поля
-"ID"      			INTEGER			PRIMARY KEY			AUTOINCREMENT,
 "Фамилия"			VARCHAR(60)		NOT NULL,
 "Имя"				VARCHAR(60)		NOT NULL,
 "Отчество"		    VARCHAR(60),
@@ -22,6 +21,17 @@ CREATE TABLE Учащийся (
 "Телефон"   			VARCHAR(100),
 "e-mail"     			VARCHAR(100)
 
+PRIMARY KEY ("Тип документа", "Номер документа")
+);
+
+CREATE TABLE Запись(
+-- Поля
+"Тип документа"	  	VARCHAR(60)		NOT NULL,
+"Номер документа"	VARCHAR(60)		NOT NULL,
+"Объединение"		VARCHAR(60)		NOT NULL
+-- Параметры
+PRIMARY KEY ("Тип документа", "Номер документа", "Объединение"),
+FOREIGN KEY ("Тип документа", "Номер документа")  REFERENCES Учащийся("Тип документа", "Номер документа")
 );
 
 
