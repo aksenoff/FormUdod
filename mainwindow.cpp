@@ -117,9 +117,9 @@ void MainWindow::saveInfo()
         QString bmon = ui->bmon->currentText();
         QString byear = QString::number(ui->byear->value());
 
-        bool isName;
-        bool isSurname;
-        bool isPatrName;
+        bool isName = true;
+        bool isSurname = true;
+        bool isPatrName = true;
 
         QRegularExpressionMatch match = names->match(name);
         isName = match.hasMatch();
@@ -127,8 +127,11 @@ void MainWindow::saveInfo()
         match = names->match(surname);
         isSurname = match.hasMatch();
 
-        match = names->match(patrname);
-        isPatrName = match.hasMatch();
+        if (!patrname.isEmpty())
+        {
+            match = names->match(patrname);
+            isPatrName = match.hasMatch();
+        }
 
         if (!isName || !isSurname || !isPatrName)
         {
