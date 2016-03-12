@@ -10,6 +10,8 @@
 #include <QRegularExpression>
 #include <QRegularExpressionMatch>
 
+#include "connectiondialog.h"
+
 namespace Ui {
 class MainWindow;
 }

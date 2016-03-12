@@ -21,7 +21,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->mainToolBar->addAction(QIcon(":/icons/Icons/info.png"), tr("О программе"), this, SLOT(programInfo()));
 
 
-    names = new QRegularExpression("^[А-Я]{1}[а-я]*(-[А-Я]{1}[а-я]*)?$");
+    names = new QRegularExpression("^[А-ЯЁ]{1}[а-яё]*(-[А-ЯЁ]{1}[а-яё]*)?$");
     words = new QRegularExpression();
 
 
@@ -35,6 +35,12 @@ MainWindow::MainWindow(QWidget *parent) :
     else
     {
         // просим указать параметры соединения
+    }
+
+    if (myDB.isOpenError())
+    {
+        ConnectionDialog cd;
+        cd.exec();
     }
 }
 
@@ -82,11 +88,11 @@ void MainWindow::saveInfo()
     {
         // Проверяем заполнение обязательных полей
 
-        QString surname = ui->surname->text().replace("--", "-");
-        QString name = ui->name->text().replace("--", "-");
-        QString docNum = ui->docNum->text().replace("--", "-");
-        QString schoolNum = ui->schoolNum->text().replace("--", "-");
-        QString phone = ui->phone->text().replace("--", "-");
+        QString surname = ui->surname->text().simplified().replace(QRegularExpression("-{2,}"), "-");
+        QString name = ui->name->text().simplified().replace(QRegularExpression("-{2,}"), "-");
+        QString docNum = ui->docNum->text().simplified().replace(QRegularExpression("-{2,}"), "-");
+        QString schoolNum = ui->schoolNum->text().simplified().replace(QRegularExpression("-{2,}"), "-");
+        QString phone = ui->phone->text().simplified().replace(QRegularExpression("-{2,}"), "-");
 
         QString docType = ui->docType->currentText();
         QString gender = ui->gender->currentText();
@@ -106,13 +112,13 @@ void MainWindow::saveInfo()
             return;
         }
 
-        QString patrname = ui->patrname->text().replace("--", "-");
-        QString schoolArea = ui->schoolArea->text().replace("--", "-");
-        QString classNum = ui->classNum->text().replace("--", "-");
-        QString mail = ui->mail->text().replace("--", "-");
-        QString parents = ui->parents->toPlainText().replace("--", "-");
-        QString address = ui->address->toPlainText().replace("--", "-");
-        QString courses = ui->courses->toPlainText().replace("--", "-");
+        QString patrname = ui->patrname->text().simplified().replace(QRegularExpression("-{2,}"), "-");
+        QString schoolArea = ui->schoolArea->text().simplified().replace(QRegularExpression("-{2,}"), "-");
+        QString classNum = ui->classNum->text().simplified().replace(QRegularExpression("-{2,}"), "-");
+        QString mail = ui->mail->text().simplified().replace(QRegularExpression("-{2,}"), "-");
+        QString parents = ui->parents->toPlainText().simplified().replace(QRegularExpression("-{2,}"), "-");
+        QString address = ui->address->toPlainText().simplified().replace(QRegularExpression("-{2,}"), "-");
+        QString courses = ui->courses->toPlainText().simplified().replace(QRegularExpression("-{2,}"), "-");
         QString bday = ui->bday->currentText();
         QString bmon = ui->bmon->currentText();
         QString byear = QString::number(ui->byear->value());
