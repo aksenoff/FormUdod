@@ -19,29 +19,32 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->mainToolBar->addAction(QIcon(":/icons/Icons/clear.png"), tr("Очистить форму"), this, SLOT(clearForm()));
     ui->mainToolBar->addAction(QIcon(":/icons/Icons/help.png"), tr("Помощь"), this, SLOT(help()));
     ui->mainToolBar->addAction(QIcon(":/icons/Icons/info.png"), tr("О программе"), this, SLOT(programInfo()));
+    ui->mainToolBar->addAction( tr("настройки соединения"), this, SLOT(changeConfig()));
 
 
     names = new QRegularExpression("^[А-ЯЁ]{1}[а-яё]*(-[А-ЯЁ]{1}[а-яё]*)?$");
     words = new QRegularExpression();
 
+    dialog = new ConnectionDialog();
+    //connect (dialog, SIGNAL(connectReconfig()), this, SLOT(configIsChange()));
+    connect (dialog, SIGNAL(connectReconfig()), this, SLOT(connectDB()));
+
 
     // ----------------------------- DataBase ------------------------------
 
     // Временная строчка - указан путь к базе.
-    if (connectDB("D:/Domerk/GUAP/Diplom/kcttTempDB.sqlite"))
+    // D:/Domerk/GUAP/Diplom/kcttTempDB.sqlite
+    if (connectDB())
     {
         // работаем с базой
     }
     else
     {
         // просим указать параметры соединения
+
+        changeConfig();
     }
 
-    if (myDB.isOpenError())
-    {
-        ConnectionDialog cd;
-        cd.exec();
-    }
 }
 
 MainWindow::~MainWindow()
@@ -51,6 +54,7 @@ MainWindow::~MainWindow()
 
     delete names;
     delete words;
+    delete dialog;
     delete ui;
 }
 
@@ -58,9 +62,36 @@ MainWindow::~MainWindow()
 // ============== Установка соединения с базой ================
 // ============================================================
 
-bool MainWindow::connectDB(QString pathToDB)
+bool MainWindow::connectDB()
 {
-    myDB = QSqlDatabase::addDatabase("QSQLITE");    // Указываем СУБД
+    if (myDB.isOpen())
+    {
+        myDB.close();
+    }
+    else
+    {
+        myDB = QSqlDatabase::addDatabase("QSQLITE");    // Указываем СУБД
+    }
+
+    QSettings settings ("Kctt", "KcttTempDB");
+    myDB.setHostName(settings.value("hostname", "localhost").toString());
+    myDB.setDatabaseName(settings.value("dbname", "kcttTempDB").toString());
+    myDB.setUserName(settings.value("username").toString());
+    myDB.setPassword(settings.value("password").toString());
+
+    if (myDB.open() && !myDB.isOpenError() && myDB.isValid())                            // Открываем соединение
+    {
+        ui->lblStatus->setText(tr("Соединение установлено")); // Выводим сообщение
+        return true;                 // Возвращаем true
+    }
+    else
+    {
+        ui->lblStatus->setText(tr("Ошибка соединения: соединение не установлено"));
+    }
+
+    return false;
+
+    /* myDB = QSqlDatabase::addDatabase("QSQLITE");    // Указываем СУБД
     myDB.setDatabaseName(pathToDB);                 // Задаём полное имя базы
 
     QFileInfo checkFile(pathToDB);                  // Информация о файле базы
@@ -79,8 +110,12 @@ bool MainWindow::connectDB(QString pathToDB)
     {
         ui->lblStatus->setText(tr("Ошибка соединения: отсутсвует файл базы данных"));
     }
-    return false;
+    return false; */
 }
+
+// ============================================================
+// ============================================================
+// ============================================================
 
 void MainWindow::saveInfo()
 {
@@ -211,6 +246,10 @@ void MainWindow::saveInfo()
 
 }
 
+// ============================================================
+// ============================================================
+// ============================================================
+
 void MainWindow::clearForm()
 {
     // Создаём окно, запрашивающее подтверждение действия
@@ -230,6 +269,10 @@ void MainWindow::clearForm()
     }
 
 }
+
+// ============================================================
+// ============================================================
+// ============================================================
 
 void MainWindow::cleaner()
 {
@@ -255,6 +298,10 @@ void MainWindow::cleaner()
     ui->byear->clear();
 }
 
+// ============================================================
+// ============================================================
+// ============================================================
+
 void MainWindow::help()
 {
 
@@ -264,3 +311,13 @@ void MainWindow::programInfo()
 {
 
 }
+
+// ============================================================
+// ============================================================
+// ============================================================
+
+void MainWindow::changeConfig()
+{
+    dialog->exec();
+}
+

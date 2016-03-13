@@ -4,7 +4,7 @@
 #include <QMainWindow>
 #include <QtSql/QSql>
 #include <QtSql/QSqlDatabase>
-#include <QtSql/QtSql>
+#include <QtSql/QSqlQuery>
 #include <QFileInfo>
 #include <QMessageBox>
 #include <QRegularExpression>
@@ -31,7 +31,8 @@ private:
     QRegularExpression *names;
     QRegularExpression *words;
 
-    bool connectDB(QString pathToDB);
+    ConnectionDialog *dialog;
+
     void cleaner();
 
 private slots:
@@ -39,6 +40,10 @@ private slots:
     void clearForm();
     void help();
     void programInfo();
+    void changeConfig();
+
+    bool connectDB();
+
 };
 
 #endif // MAINWINDOW_H
