@@ -17,10 +17,9 @@ MainWindow::MainWindow(QWidget *parent) :
 
     ui->mainToolBar->addAction(QIcon(":/icons/Icons/save.png"), tr("Сохранить"), this, SLOT(saveInfo()));
     ui->mainToolBar->addAction(QIcon(":/icons/Icons/clear.png"), tr("Очистить форму"), this, SLOT(clearForm()));
+    ui->mainToolBar->addAction(QIcon(":/icons/Icons/db.png"), tr("Настройки соединения"), this, SLOT(changeConfig()));
     ui->mainToolBar->addAction(QIcon(":/icons/Icons/help.png"), tr("Помощь"), this, SLOT(help()));
     ui->mainToolBar->addAction(QIcon(":/icons/Icons/info.png"), tr("О программе"), this, SLOT(programInfo()));
-    ui->mainToolBar->addAction( tr("настройки соединения"), this, SLOT(changeConfig()));
-
 
     names = new QRegularExpression("^[А-ЯЁ]{1}[а-яё]*(-[А-ЯЁ]{1}[а-яё]*)?$");
     words = new QRegularExpression();
@@ -34,14 +33,9 @@ MainWindow::MainWindow(QWidget *parent) :
 
     // Временная строчка - указан путь к базе.
     // D:/Domerk/GUAP/Diplom/kcttTempDB.sqlite
-    if (connectDB())
-    {
-        // работаем с базой
-    }
-    else
+    if (!connectDB())
     {
         // просим указать параметры соединения
-
         changeConfig();
     }
 
