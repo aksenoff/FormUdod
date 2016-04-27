@@ -84,27 +84,6 @@ bool MainWindow::connectDB()
     }
 
     return false;
-
-    /* myDB = QSqlDatabase::addDatabase("QSQLITE");    // Указываем СУБД
-    myDB.setDatabaseName(pathToDB);                 // Задаём полное имя базы
-
-    QFileInfo checkFile(pathToDB);                  // Информация о файле базы
-
-    if (checkFile.isFile())                         // Если такой файл существует
-    {
-        if (myDB.open())                            // Открываем соединение
-        {
-            ui->lblStatus->setText(tr("Соединение установлено")); // Выводим сообщение
-            return true;                 // Возвращаем true
-        }
-        else
-            ui->lblStatus->setText(tr("Ошибка соединения: соединение не установлено"));
-    }
-    else
-    {
-        ui->lblStatus->setText(tr("Ошибка соединения: отсутсвует файл базы данных"));
-    }
-    return false; */
 }
 
 // ============================================================
@@ -148,9 +127,11 @@ void MainWindow::saveInfo()
         QString parents = ui->parents->toPlainText().simplified().replace(QRegularExpression("-{2,}"), "-");
         QString address = ui->address->toPlainText().simplified().replace(QRegularExpression("-{2,}"), "-");
         QString courses = ui->courses->toPlainText().simplified().replace(QRegularExpression("-{2,}"), "-");
-        QString bday = ui->bday->currentText();
-        QString bmon = ui->bmon->currentText();
-        QString byear = QString::number(ui->byear->value());
+
+        QString birthday;
+
+        if (ui->bday->currentIndex() != 0 && ui->bmon->currentIndex() != 0)
+            birthday = ui->bday->currentText() + "." + ui->bmon->currentText() + "." + QString::number(ui->byear->value());
 
         bool isName = true;
         bool isSurname = true;
@@ -180,7 +161,6 @@ void MainWindow::saveInfo()
             return;
         }
 
-        QString birthday = bday + "." + bmon + "." + byear;
 
         // Создаём окно, запрашивающее подтверждение действия
         QMessageBox messageBox(QMessageBox::Question,
