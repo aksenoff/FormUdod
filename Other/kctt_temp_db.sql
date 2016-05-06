@@ -1,38 +1,38 @@
-PRAGMA foreign_keys = ON;
+п»їPRAGMA foreign_keys = ON;
 
-DROP TABLE IF EXISTS Запись;
-DROP TABLE IF EXISTS Учащийся;
+DROP TABLE IF EXISTS Р—Р°РїРёСЃСЊ;
+DROP TABLE IF EXISTS РЈС‡Р°С‰РёР№СЃСЏ;
 
-CREATE TABLE Учащийся (
--- Поля
-`Фамилия`			VARCHAR(60)		NOT NULL,
-`Имя`				VARCHAR(60)		NOT NULL,
-`Отчество`		    VARCHAR(60),
-`Тип документа`	  	VARCHAR(60)		NOT NULL,
-`Номер документа`	VARCHAR(60)		NOT NULL,
-`Пол`			    VARCHAR(3)		NOT NULL,
-`Год рождения`	  	DATE,
+CREATE TABLE РЈС‡Р°С‰РёР№СЃСЏ (
+-- РџРѕР»СЏ
+`Р¤Р°РјРёР»РёСЏ`			VARCHAR(60)		NOT NULL,
+`РРјСЏ`				VARCHAR(60)		NOT NULL,
+`РћС‚С‡РµСЃС‚РІРѕ`		    VARCHAR(60),
+`РўРёРї РґРѕРєСѓРјРµРЅС‚Р°`	  	VARCHAR(60)		NOT NULL,
+`РќРѕРјРµСЂ РґРѕРєСѓРјРµРЅС‚Р°`	VARCHAR(60)		NOT NULL,
+`РџРѕР»`			    VARCHAR(3)		NOT NULL,
+`Р“РѕРґ СЂРѕР¶РґРµРЅРёСЏ`	  	DATE,
 
-`Район школы`		  VARCHAR(60),
-`Школа`			      VARCHAR(60),
-`Класс`			      VARCHAR(5),
+`Р Р°Р№РѕРЅ С€РєРѕР»С‹`		  VARCHAR(60),
+`РЁРєРѕР»Р°`			      VARCHAR(60),
+`РљР»Р°СЃСЃ`			      VARCHAR(5),
 
-`Родители`		    VARCHAR(200),
-`Домашний адрес`	VARCHAR(200),
-`Телефон`   			VARCHAR(100),
+`Р РѕРґРёС‚РµР»Рё`		    VARCHAR(200),
+`Р”РѕРјР°С€РЅРёР№ Р°РґСЂРµСЃ`	VARCHAR(200),
+`РўРµР»РµС„РѕРЅ`   			VARCHAR(100),
 `e-mail`    			VARCHAR(100),
 
-PRIMARY KEY (`Тип документа`, `Номер документа`)
+PRIMARY KEY (`РўРёРї РґРѕРєСѓРјРµРЅС‚Р°`, `РќРѕРјРµСЂ РґРѕРєСѓРјРµРЅС‚Р°`)
 );
 
-CREATE TABLE Запись(
--- Поля
-`Тип документа`	  	VARCHAR(60)		NOT NULL,
-`Номер документа`	VARCHAR(60)		NOT NULL,
-`Объединение`		VARCHAR(60)		NOT NULL,
--- Параметры
-PRIMARY KEY (`Тип документа`, `Номер документа`, `Объединение`),
-FOREIGN KEY (`Тип документа`, `Номер документа`)  REFERENCES Учащийся(`Тип документа`, `Номер документа`)
+CREATE TABLE Р—Р°РїРёСЃСЊ(
+-- РџРѕР»СЏ
+`РўРёРї РґРѕРєСѓРјРµРЅС‚Р°`	  	VARCHAR(60)		NOT NULL,
+`РќРѕРјРµСЂ РґРѕРєСѓРјРµРЅС‚Р°`	VARCHAR(60)		NOT NULL,
+`РћР±СЉРµРґРёРЅРµРЅРёРµ`		VARCHAR(60)		NOT NULL,
+-- РџР°СЂР°РјРµС‚СЂС‹
+PRIMARY KEY (`РўРёРї РґРѕРєСѓРјРµРЅС‚Р°`, `РќРѕРјРµСЂ РґРѕРєСѓРјРµРЅС‚Р°`, `РћР±СЉРµРґРёРЅРµРЅРёРµ`),
+FOREIGN KEY (`РўРёРї РґРѕРєСѓРјРµРЅС‚Р°`, `РќРѕРјРµСЂ РґРѕРєСѓРјРµРЅС‚Р°`)  REFERENCES РЈС‡Р°С‰РёР№СЃСЏ(`РўРёРї РґРѕРєСѓРјРµРЅС‚Р°`, `РќРѕРјРµСЂ РґРѕРєСѓРјРµРЅС‚Р°`)
 );
 
 
