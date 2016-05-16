@@ -5,10 +5,13 @@
 #include <QtSql/QSql>
 #include <QtSql/QSqlDatabase>
 #include <QtSql/QSqlQuery>
+#include <QFile>
 #include <QFileInfo>
 #include <QMessageBox>
 #include <QRegularExpression>
 #include <QRegularExpressionMatch>
+#include <QTextStream>
+#include <QComboBox>
 
 #include "connectiondialog.h"
 
@@ -34,6 +37,7 @@ private:
     ConnectionDialog *dialog;
 
     void cleaner();
+    void getDataAss(QStringList* qsl, QComboBox* comboBox);
 
 private slots:
     void saveInfo();

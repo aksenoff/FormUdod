@@ -28,6 +28,31 @@ MainWindow::MainWindow(QWidget *parent) :
     //connect (dialog, SIGNAL(connectReconfig()), this, SLOT(configIsChange()));
     connect (dialog, SIGNAL(connectReconfig()), this, SLOT(connectDB()));
 
+    // Получение инфы обобъединениях
+
+    QFile file (":/data/Other/association.txt");
+    if(file.open(QIODevice::ReadOnly))
+    {
+        QTextStream stream(&file);
+        if(stream.status() == QTextStream::Ok)
+        {
+            QStringList qsl;
+            while (!stream.atEnd())
+            {
+                QString str = stream.readLine().simplified().replace(QRegularExpression("-{2,}"), "-");
+                if (!str.isEmpty() && str.at(0) != '#')
+                    qsl.append(str);
+            }
+
+            qsl.sort();
+            qsl.prepend("- Не выбрано -");
+            ui->ass1->addItems(qsl);
+            ui->ass2->addItems(qsl);
+            ui->ass3->addItems(qsl);
+        }
+        file.close();
+    }
+
 
     // ----------------------------- DataBase ------------------------------
 
@@ -105,7 +130,7 @@ void MainWindow::saveInfo()
         QString docType = ui->docType->currentText();
         QString gender = ui->gender->currentText();
 
-        if (surname == "" || name == "" || docNum == "" || schoolNum == "" || phone == "" || docType == "" || gender == "")
+        if (surname == "" || name == "" || docNum == "" || schoolNum == "" || phone == "" || docType == "" || gender == "" || (ui->ass1->currentIndex() == 0 && ui->ass2->currentIndex() == 0 && ui->ass3->currentIndex() == 0))
         {
             // Если одно или несколько обязательных полей не заполнены
             // Сообщаем об этом пользователю
@@ -126,7 +151,6 @@ void MainWindow::saveInfo()
         QString mail = ui->mail->text().simplified().replace(QRegularExpression("-{2,}"), "-");
         QString parents = ui->parents->toPlainText().simplified().replace(QRegularExpression("-{2,}"), "-");
         QString address = ui->address->toPlainText().simplified().replace(QRegularExpression("-{2,}"), "-");
-        QString courses = ui->courses->toPlainText().simplified().replace(QRegularExpression("-{2,}"), "-");
 
         QString birthday;
 
@@ -176,7 +200,7 @@ void MainWindow::saveInfo()
         if (messageBox.exec() == QMessageBox::Yes)
         {
             QString strQuery = "INSERT INTO Учащийся (";
-            strQuery.append("'Фамилия', 'Имя', 'Отчество', 'Тип документа', 'Номер документа', 'Пол', 'Год рождения', ");
+            strQuery.append("'Фамилия', 'Имя', 'Отчество', 'Тип документа', 'Номер документа', 'Пол', 'Дата рождения', ");
             strQuery.append("'Район школы', 'Школа', 'Класс', 'Родители', 'Домашний адрес', 'Телефон', 'e-mail') VALUES ('");
             strQuery.append(surname + "', '" + name  + "', '" + patrname  + "', '" + docType  + "', '" + docNum  + "', '" + gender  + "', '" + birthday  + "', '");
             strQuery.append(schoolArea  + "', '" + schoolNum  + "', '" + classNum  + "', '" + parents  + "', '" + address  + "', '" + phone  + "', '" + mail  + "');");
@@ -185,17 +209,16 @@ void MainWindow::saveInfo()
             query.exec(strQuery);
             strQuery.clear();
 
-            QStringList qsl = courses.split("/n", QString::SkipEmptyParts);
+            QStringList qsl;
+            getDataAss(&qsl, ui->ass1);
+            getDataAss(&qsl, ui->ass2);
+            getDataAss(&qsl, ui->ass3);
             for (QString & newCours : qsl)
             {
-                newCours = newCours.trimmed(); // обрезаем лишние пробелы
-                if (!newCours.isEmpty())
-                {
-                    strQuery.append("INSERT INTO Запись ('Тип документа', 'Номер документа', 'Объединение') VALUES ('");
-                    strQuery.append(docType  + "', '" + docNum  + "', '" + newCours + "');");
-                    query.exec(strQuery);
-                    strQuery.clear();
-                }
+                strQuery.append("INSERT INTO Запись ('Тип документа', 'Номер документа', 'Объединение') VALUES ('");
+                strQuery.append(docType  + "', '" + docNum  + "', '" + newCours + "');");
+                query.exec(strQuery);
+                strQuery.clear();
             }
 
             cleaner();
@@ -244,6 +267,12 @@ void MainWindow::clearForm()
 
 }
 
+void MainWindow::getDataAss(QStringList* qsl, QComboBox* comboBox)
+{
+    if (comboBox->currentIndex() != 0)
+        qsl->append(comboBox->currentText());
+}
+
 // ============================================================
 // ============================================================
 // ============================================================
@@ -262,7 +291,6 @@ void MainWindow::cleaner()
 
     ui->parents->clear();
     ui->address->clear();
-    ui->courses->clear();
 
     ui->docType->setCurrentIndex(0);
     ui->gender->setCurrentIndex(0);
@@ -270,6 +298,10 @@ void MainWindow::cleaner()
     ui->bmon->setCurrentIndex(0);
 
     ui->byear->clear();
+
+    ui->ass1->setCurrentIndex(0);
+    ui->ass2->setCurrentIndex(0);
+    ui->ass3->setCurrentIndex(0);
 }
 
 // ============================================================

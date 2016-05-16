@@ -6,4 +6,7 @@
         <file>Icons/help.png</file>
         <file>Icons/db.png</file>
     </qresource>
+    <qresource prefix="/data">
+        <file>Other/association.txt</file>
+    </qresource>
 </RCC>
