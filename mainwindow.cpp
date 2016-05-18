@@ -9,7 +9,10 @@ MainWindow::MainWindow(QWidget *parent) :
 
     // ------------------------- Всякая красота ----------------------------
 
-    this->setWindowTitle(tr("Запись в объединения"));
+    QSettings settings (":/data/Other/config.ini", QSettings::IniFormat);
+    settings.beginGroup("Settings");
+    this->setWindowTitle(settings.value("windowtile").toString());
+    settings.endGroup();
 
     // --------------------------- Main ToolBar ----------------------------
 
@@ -21,14 +24,8 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->mainToolBar->addAction(QIcon(":/icons/Icons/help.png"), tr("Помощь"), this, SLOT(help()));
     ui->mainToolBar->addAction(QIcon(":/icons/Icons/info.png"), tr("О программе"), this, SLOT(programInfo()));
 
-    ui->toolBar->addAction(QIcon(":/icons/Icons/db.png"), tr("Настройки соединения"), this, SLOT(changeConfig()));
-
     names = new QRegularExpression("^[А-ЯЁ]{1}[а-яё]*(-[А-ЯЁ]{1}[а-яё]*)?$");
     words = new QRegularExpression();
-
-    dialog = new ConnectionDialog();
-    //connect (dialog, SIGNAL(connectReconfig()), this, SLOT(configIsChange()));
-    connect (dialog, SIGNAL(connectReconfig()), this, SLOT(connectDB()));
 
     // Получение инфы обобъединениях
 
@@ -58,14 +55,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     // ----------------------------- DataBase ------------------------------
 
-    // Временная строчка - указан путь к базе.
-    // D:/Domerk/GUAP/Diplom/kcttTempDB.sqlite
-    if (!connectDB())
-    {
-        // просим указать параметры соединения
-        changeConfig();
-    }
-
+    connectDB();
 }
 
 MainWindow::~MainWindow()
@@ -75,7 +65,6 @@ MainWindow::~MainWindow()
 
     delete names;
     delete words;
-    delete dialog;
     delete ui;
 }
 
@@ -94,11 +83,13 @@ bool MainWindow::connectDB()
         myDB = QSqlDatabase::addDatabase("QSQLITE");    // Указываем СУБД
     }
 
-    QSettings settings ("Kctt", "KcttTempDB");
+    QSettings settings (":/data/Other/config.ini", QSettings::IniFormat);
+    settings.beginGroup("Сonnection");
     myDB.setHostName(settings.value("hostname", "localhost").toString());
     myDB.setDatabaseName(settings.value("dbname", "kcttTempDB").toString());
     myDB.setUserName(settings.value("username").toString());
     myDB.setPassword(settings.value("password").toString());
+    settings.endGroup();
 
     if (myDB.open() && !myDB.isOpenError() && myDB.isValid())                            // Открываем соединение
     {
@@ -230,9 +221,6 @@ void MainWindow::saveInfo()
     else
     {
         // Выводим сообщение с инфой
-        // Вероятно, имеет смысл иметь возможность вызвать отсюда окна с настройками соединения
-
-
         ui->lblStatus->setText(tr("Ошибка сохранения: отсутсвует соединение с базой"));
         QMessageBox messageBox(QMessageBox::Information,
                                tr("Сохранение"),
@@ -323,9 +311,4 @@ void MainWindow::programInfo()
 // ============================================================
 // ============================================================
 // ============================================================
-
-void MainWindow::changeConfig()
-{
-    dialog->exec();
-}
 

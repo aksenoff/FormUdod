@@ -12,8 +12,7 @@
 #include <QRegularExpressionMatch>
 #include <QTextStream>
 #include <QComboBox>
-
-#include "connectiondialog.h"
+#include <QSettings>
 
 namespace Ui {
 class MainWindow;
@@ -34,8 +33,6 @@ private:
     QRegularExpression *names;
     QRegularExpression *words;
 
-    ConnectionDialog *dialog;
-
     void cleaner();
     void getDataAss(QStringList* qsl, QComboBox* comboBox);
 
@@ -44,7 +41,6 @@ private slots:
     void clearForm();
     void help();
     void programInfo();
-    void changeConfig();
 
     bool connectDB();
 
