@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>745</width>
-    <height>533</height>
+    <height>566</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -29,7 +29,7 @@
          <x>0</x>
          <y>0</y>
          <width>725</width>
-         <height>323</height>
+         <height>356</height>
         </rect>
        </property>
        <layout class="QHBoxLayout" name="horizontalLayout_2">
@@ -72,7 +72,7 @@
              <widget class="QComboBox" name="gender">
               <item>
                <property name="text">
-                <string/>
+                <string>- Не выбрано -</string>
                </property>
               </item>
               <item>
@@ -142,7 +142,7 @@
              <widget class="QComboBox" name="docType">
               <item>
                <property name="text">
-                <string/>
+                <string>- Не выбрано -</string>
                </property>
               </item>
               <item>
@@ -578,19 +578,96 @@
              </sizepolicy>
             </property>
             <property name="text">
-             <string>Родители</string>
+             <string>Родители (законные представители)</string>
             </property>
            </widget>
           </item>
           <item>
-           <widget class="QTextEdit" name="parents">
-            <property name="maximumSize">
-             <size>
-              <width>16777215</width>
-              <height>80</height>
-             </size>
+           <layout class="QFormLayout" name="formLayout_3">
+            <property name="topMargin">
+             <number>0</number>
             </property>
-           </widget>
+            <item row="0" column="0">
+             <widget class="QComboBox" name="parentType1">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <item>
+               <property name="text">
+                <string>- Не выбрано -</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Мать</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Отец</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Опекун</string>
+               </property>
+              </item>
+             </widget>
+            </item>
+            <item row="0" column="1">
+             <widget class="QLineEdit" name="parent1">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="0">
+             <widget class="QComboBox" name="parentType2">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <item>
+               <property name="text">
+                <string>- Не выбрано -</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Мать</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Отец</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Опекун</string>
+               </property>
+              </item>
+             </widget>
+            </item>
+            <item row="1" column="1">
+             <widget class="QLineEdit" name="parent2">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+             </widget>
+            </item>
+           </layout>
           </item>
           <item>
            <widget class="QLabel" name="label_14">
@@ -610,7 +687,7 @@
             <property name="maximumSize">
              <size>
               <width>16777215</width>
-              <height>80</height>
+              <height>40</height>
              </size>
             </property>
            </widget>
@@ -660,6 +737,82 @@
             </item>
             <item row="1" column="1">
              <widget class="QLineEdit" name="mail"/>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <widget class="QLabel" name="label_22">
+            <property name="font">
+             <font>
+              <weight>75</weight>
+              <bold>true</bold>
+             </font>
+            </property>
+            <property name="text">
+             <string>Дополнительная информация</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <layout class="QGridLayout" name="gridLayout_2">
+            <property name="topMargin">
+             <number>0</number>
+            </property>
+            <item row="3" column="0">
+             <widget class="QCheckBox" name="checkBox_4">
+              <property name="text">
+               <string>Неполная семья</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="0">
+             <widget class="QCheckBox" name="checkBox_3">
+              <property name="text">
+               <string>Сирота</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="0">
+             <widget class="QCheckBox" name="checkBox_2">
+              <property name="text">
+               <string>Инвалид</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="0">
+             <widget class="QCheckBox" name="checkBox">
+              <property name="text">
+               <string>С ослабленным здоровьем</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="1">
+             <widget class="QCheckBox" name="checkBox_5">
+              <property name="text">
+               <string>Многодетная семья</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="1">
+             <widget class="QCheckBox" name="checkBox_6">
+              <property name="text">
+               <string>Малообеспеченная семья</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="1">
+             <widget class="QCheckBox" name="checkBox_7">
+              <property name="text">
+               <string>На учёте в полиции</string>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="1">
+             <widget class="QCheckBox" name="checkBox_8">
+              <property name="text">
+               <string>Мигранты</string>
+              </property>
+             </widget>
             </item>
            </layout>
           </item>

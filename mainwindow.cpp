@@ -9,9 +9,9 @@ MainWindow::MainWindow(QWidget *parent) :
 
     // ------------------------- Всякая красота ----------------------------
 
-    QSettings settings (":/data/Other/config.ini", QSettings::IniFormat);
+    QSettings settings ("Other/config.ini", QSettings::IniFormat);
     settings.beginGroup("Settings");
-    this->setWindowTitle(settings.value("windowtile").toString());
+    this->setWindowTitle(settings.value("windowtile", "Запись в объединения").toString());
     settings.endGroup();
 
     // --------------------------- Main ToolBar ----------------------------
@@ -29,7 +29,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     // Получение инфы обобъединениях
 
-    QFile file (":/data/Other/association.txt");
+    QFile file ("Other/association.txt");
     if(file.open(QIODevice::ReadOnly))
     {
         QTextStream stream(&file);
@@ -83,7 +83,7 @@ bool MainWindow::connectDB()
         myDB = QSqlDatabase::addDatabase("QSQLITE");    // Указываем СУБД
     }
 
-    QSettings settings (":/data/Other/config.ini", QSettings::IniFormat);
+    QSettings settings ("Other/config.ini", QSettings::IniFormat);
     settings.beginGroup("Сonnection");
     myDB.setHostName(settings.value("hostname", "localhost").toString());
     myDB.setDatabaseName(settings.value("dbname", "kcttTempDB").toString());
@@ -142,7 +142,13 @@ void MainWindow::saveInfo()
         QString schoolArea = ui->schoolArea->text().simplified().replace(QRegularExpression("-{2,}"), "-");
         QString classNum = ui->classNum->text().simplified().replace(QRegularExpression("-{2,}"), "-");
         QString mail = ui->mail->text().simplified().replace(QRegularExpression("-{2,}"), "-");
-        QString parents = ui->parents->toPlainText().simplified().replace(QRegularExpression("-{2,}"), "-");
+        QString parents;
+        if (ui->parentType1->currentIndex() != 0)
+            parents.append(ui->parentType1->currentText() + ": " + ui->parent1->toPlainText().simplified().replace(QRegularExpression("-{2,}"), "-") + "; ");
+
+        if (ui->parentType2->currentIndex() != 0)
+            parents.append(ui->parentType2->currentText() + ": " + ui->parent2->toPlainText().simplified().replace(QRegularExpression("-{2,}"), "-")  + "; ");
+
         QString address = ui->address->toPlainText().simplified().replace(QRegularExpression("-{2,}"), "-");
 
         QString birthday;
@@ -279,7 +285,7 @@ void MainWindow::cleaner()
     ui->phone->clear();
     ui->mail->clear();
 
-    ui->parents->clear();
+    //ui->parents->clear();
     ui->address->clear();
 
     ui->docType->setCurrentIndex(0);

@@ -5,8 +5,4 @@
         <file>Icons/info.png</file>
         <file>Icons/help.png</file>
     </qresource>
-    <qresource prefix="/data">
-        <file>Other/association.txt</file>
-        <file>Other/config.ini</file>
-    </qresource>
 </RCC>
