@@ -55,7 +55,18 @@ MainWindow::MainWindow(QWidget *parent) :
 
     // ----------------------------- DataBase ------------------------------
 
-    connectDB();
+    myDB = QSqlDatabase::addDatabase("QSQLITE");    // Указываем СУБД
+    settings.beginGroup("Database");
+    myDB.setHostName(settings.value("hostname", "localhost").toString());
+    myDB.setDatabaseName(settings.value("dbname", "kcttTempDB").toString());
+    myDB.setUserName(settings.value("username").toString());
+    myDB.setPassword(settings.value("password").toString());
+    settings.endGroup();
+
+    if (myDB.open() && !myDB.isOpenError() && myDB.isValid())                            // Открываем соединение
+        ui->lblStatus->setText(tr("Соединение установлено")); // Выводим сообщение
+    else
+        ui->lblStatus->setText(tr("Ошибка соединения: соединение не установлено"));
 }
 
 MainWindow::~MainWindow()
@@ -66,44 +77,6 @@ MainWindow::~MainWindow()
     delete names;
     delete words;
     delete ui;
-}
-
-// ============================================================
-// ============== Установка соединения с базой ================
-// ============================================================
-
-bool MainWindow::connectDB()
-{
-    if (myDB.isOpen())
-    {
-        myDB.close();
-    }
-    else
-    {
-        myDB = QSqlDatabase::addDatabase("QSQLITE");    // Указываем СУБД
-    }
-
-    QSettings settings ("Other/config.ini", QSettings::IniFormat);
-    settings.beginGroup("Сonnection");
-    myDB.setHostName(settings.value("hostname", "localhost").toString());
-    myDB.setDatabaseName(settings.value("dbname", "kcttTempDB").toString());
-    myDB.setUserName(settings.value("username").toString());
-    myDB.setPassword(settings.value("password").toString());
-    settings.endGroup();
-
-    qDebug() << myDB.databaseName();
-
-    if (myDB.open() && !myDB.isOpenError() && myDB.isValid())                            // Открываем соединение
-    {
-        ui->lblStatus->setText(tr("Соединение установлено")); // Выводим сообщение
-        return true;                 // Возвращаем true
-    }
-    else
-    {
-        ui->lblStatus->setText(tr("Ошибка соединения: соединение не установлено"));
-    }
-
-    return false;
 }
 
 // ============================================================

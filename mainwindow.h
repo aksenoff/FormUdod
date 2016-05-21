@@ -44,8 +44,6 @@ private slots:
     void help();
     void programInfo();
 
-    bool connectDB();
-
 };
 
 #endif // MAINWINDOW_H
