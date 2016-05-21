@@ -52,7 +52,6 @@ MainWindow::MainWindow(QWidget *parent) :
         file.close();
     }
 
-
     // ----------------------------- DataBase ------------------------------
 
     myDB = QSqlDatabase::addDatabase("QSQLITE");    // Указываем СУБД
@@ -209,6 +208,51 @@ void MainWindow::saveInfo()
                 query.exec(strQuery);
                 strQuery.clear();
             }
+
+            // ------------------------------------------
+            // Создание файла для печати
+            // шаблон: Other/template.txt
+
+            QFile file("Other/template.txt");
+            QString declaration;
+            if(file.open(QIODevice::ReadOnly))
+            {
+                QTextStream stream(&file);
+                declaration = stream.readAll();
+                file.close();
+            }
+
+            declaration.replace("%surname%", surname);
+            declaration.replace("%name%", name);
+            declaration.replace("%patrname%", patrname);
+
+            declaration.replace("%parent1_type%", ui->parentType1->currentText());
+            declaration.replace("%parent1%", ui->parent1->text().simplified());
+            declaration.replace("%birthday%", birthday);
+            declaration.replace("%classNum%", classNum);
+            declaration.replace("%schoolNum%", schoolNum);
+            declaration.replace("%schoolArea%", schoolArea);
+            declaration.replace("%address%", address);
+            declaration.replace("%phone%", phone);
+
+            QString ass;
+            for (int i = 1; i<=qsl.size(); i++)
+                ass.append(QString::number(i) + ".&nbsp;<u>" + qsl.at(i-1) +"</u><br />");
+
+            declaration.replace("%ass%", ass);
+
+            qDebug() << declaration;
+
+            QString filename = surname + "_" + name + "_" + docNum + ".html";
+            QFile file2(filename);
+            if(file2.open(QIODevice::WriteOnly))
+            {
+                QTextStream stream(&file2);
+                stream << declaration;
+                file2.close();
+            }
+
+            // ------------------------------------------
 
             cleaner();
         }
