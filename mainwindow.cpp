@@ -91,6 +91,8 @@ bool MainWindow::connectDB()
     myDB.setPassword(settings.value("password").toString());
     settings.endGroup();
 
+    qDebug() << myDB.databaseName();
+
     if (myDB.open() && !myDB.isOpenError() && myDB.isValid())                            // Открываем соединение
     {
         ui->lblStatus->setText(tr("Соединение установлено")); // Выводим сообщение
@@ -144,10 +146,10 @@ void MainWindow::saveInfo()
         QString mail = ui->mail->text().simplified().replace(QRegularExpression("-{2,}"), "-");
         QString parents;
         if (ui->parentType1->currentIndex() != 0)
-            parents.append(ui->parentType1->currentText() + ": " + ui->parent1->toPlainText().simplified().replace(QRegularExpression("-{2,}"), "-") + "; ");
+            parents.append(ui->parentType1->currentText() + ": " + ui->parent1->text().simplified().replace(QRegularExpression("-{2,}"), "-") + "; ");
 
         if (ui->parentType2->currentIndex() != 0)
-            parents.append(ui->parentType2->currentText() + ": " + ui->parent2->toPlainText().simplified().replace(QRegularExpression("-{2,}"), "-")  + "; ");
+            parents.append(ui->parentType2->currentText() + ": " + ui->parent2->text().simplified().replace(QRegularExpression("-{2,}"), "-")  + "; ");
 
         QString address = ui->address->toPlainText().simplified().replace(QRegularExpression("-{2,}"), "-");
 
@@ -155,6 +157,16 @@ void MainWindow::saveInfo()
 
         if (ui->bday->currentIndex() != 0 && ui->bmon->currentIndex() != 0)
             birthday = ui->bday->currentText() + "." + ui->bmon->currentText() + "." + QString::number(ui->byear->value());
+
+
+        QString police = getDataCheckBox(ui->police);
+        QString inv = getDataCheckBox(ui->inv);
+        QString large = getDataCheckBox(ui->large);
+        QString migr = getDataCheckBox(ui->migr);
+        QString incom = getDataCheckBox(ui->incom);
+        QString needy = getDataCheckBox(ui->needy);
+        QString health = getDataCheckBox(ui->health);
+        QString orph = getDataCheckBox(ui->orph);
 
         bool isName = true;
         bool isSurname = true;
@@ -199,13 +211,18 @@ void MainWindow::saveInfo()
         if (messageBox.exec() == QMessageBox::Yes)
         {
             QString strQuery = "INSERT INTO Учащийся (";
-            strQuery.append("'Фамилия', 'Имя', 'Отчество', 'Тип документа', 'Номер документа', 'Пол', 'Дата рождения', ");
-            strQuery.append("'Район школы', 'Школа', 'Класс', 'Родители', 'Домашний адрес', 'Телефон', 'e-mail') VALUES ('");
+            strQuery.append("`Фамилия`, `Имя`, `Отчество`, `Тип документа`, `Номер документа`, `Пол`, `Дата рождения`, `Район школы`, `Школа`, `Класс`, `Родители`, `Домашний адрес`, `Телефон`, ");
+            strQuery.append("`e-mail`, `С ослабленным здоровьем`, `Сирота`, `Инвалид`, `На учёте в полиции`, `Многодетная семья`, `Неполная семья`, `Малообеспеченная семья`, `Мигранты`) VALUES ('");
             strQuery.append(surname + "', '" + name  + "', '" + patrname  + "', '" + docType  + "', '" + docNum  + "', '" + gender  + "', '" + birthday  + "', '");
-            strQuery.append(schoolArea  + "', '" + schoolNum  + "', '" + classNum  + "', '" + parents  + "', '" + address  + "', '" + phone  + "', '" + mail  + "');");
+            strQuery.append(schoolArea  + "', '" + schoolNum  + "', '" + classNum  + "', '" + parents  + "', '" + address  + "', '" + phone  + "', '" + mail + "', '");
+            strQuery.append(health  + "', '" + orph  + "', '" + inv  + "', '" + police  + "', '" + large  + "', '" + incom  + "', '" + needy  + "', '" + migr + "');");
 
             QSqlQuery query;
             query.exec(strQuery);
+
+            qDebug() << strQuery;
+            //qDebug() << query.lastError().toString();
+
             strQuery.clear();
 
             QStringList qsl;
@@ -214,7 +231,7 @@ void MainWindow::saveInfo()
             getDataAss(&qsl, ui->ass3);
             for (QString & newCours : qsl)
             {
-                strQuery.append("INSERT INTO Запись ('Тип документа', 'Номер документа', 'Объединение') VALUES ('");
+                strQuery.append("INSERT INTO Запись (`Тип документа`, `Номер документа`, `Объединение`) VALUES ('");
                 strQuery.append(docType  + "', '" + docNum  + "', '" + newCours + "');");
                 query.exec(strQuery);
                 strQuery.clear();
@@ -267,6 +284,14 @@ void MainWindow::getDataAss(QStringList* qsl, QComboBox* comboBox)
 {
     if (comboBox->currentIndex() != 0)
         qsl->append(comboBox->currentText());
+}
+
+QString MainWindow::getDataCheckBox(QCheckBox* checkBox)
+{
+    if (checkBox->isChecked())
+        return "true";
+    else
+        return "false";
 }
 
 // ============================================================

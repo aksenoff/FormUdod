@@ -13,6 +13,7 @@
 #include <QTextStream>
 #include <QComboBox>
 #include <QSettings>
+#include <QtDebug>
 
 namespace Ui {
 class MainWindow;
@@ -35,6 +36,7 @@ private:
 
     void cleaner();
     void getDataAss(QStringList* qsl, QComboBox* comboBox);
+    QString getDataCheckBox(QCheckBox* checkBox);
 
 private slots:
     void saveInfo();
