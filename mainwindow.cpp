@@ -323,6 +323,15 @@ void MainWindow::cleaner()
     ui->ass1->setCurrentIndex(0);
     ui->ass2->setCurrentIndex(0);
     ui->ass3->setCurrentIndex(0);
+
+    ui->incom->setChecked(false);
+    ui->inv->setChecked(false);
+    ui->migr->setChecked(false);
+    ui->large->setChecked(false);
+    ui->police->setChecked(false);
+    ui->orph->setChecked(false);
+    ui->needy->setChecked(false);
+    ui->health->setChecked(false);
 }
 
 // ============================================================
