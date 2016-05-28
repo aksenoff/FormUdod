@@ -7,6 +7,8 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
+    MyInfo = new info();
+
     // ------------------------- Всякая красота ----------------------------
 
     QSettings settings ("Other/config.ini", QSettings::IniFormat);
@@ -22,7 +24,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->mainToolBar->addAction(QIcon(":/icons/Icons/clear.png"), tr("Очистить форму"), this, SLOT(clearForm()));
     ui->mainToolBar->addSeparator();
     ui->mainToolBar->addAction(QIcon(":/icons/Icons/help.png"), tr("Помощь"), this, SLOT(help()));
-    ui->mainToolBar->addAction(QIcon(":/icons/Icons/info.png"), tr("О программе"), this, SLOT(programInfo()));
+    ui->mainToolBar->addAction(QIcon(":/icons/Icons/info.png"), tr("О программе"), MyInfo, SLOT(show()));
 
     names = new QRegularExpression("^[А-ЯЁ]{1}[а-яё]*(-[А-ЯЁ]{1}[а-яё]*)?$");
     words = new QRegularExpression();
@@ -241,6 +243,17 @@ void MainWindow::saveInfo()
 
             declaration.replace("%ass%", ass);
 
+            replaceBoolData(&declaration, "%large%", large);
+            replaceBoolData(&declaration, "%incom%", incom);
+            replaceBoolData(&declaration, "%needy%", needy);
+            replaceBoolData(&declaration, "%orph%", orph);
+            replaceBoolData(&declaration, "%migr%", migr);
+
+            if (inv == "true" || health == "true")
+                declaration.replace("%health%", "Да");
+            else
+                declaration.replace("%health%", "Нет");
+
             qDebug() << declaration;
 
             QString filename = surname + "_" + name + "_" + docNum + ".html";
@@ -311,6 +324,14 @@ QString MainWindow::getDataCheckBox(QCheckBox* checkBox)
         return "false";
 }
 
+void MainWindow::replaceBoolData(QString* mainstr, QString dataname, QString data)
+{
+    if (data == "true")
+        mainstr->replace(dataname, "Да");
+    else
+        mainstr->replace(dataname, "Нет");
+}
+
 // ============================================================
 // ============================================================
 // ============================================================
@@ -341,6 +362,12 @@ void MainWindow::cleaner()
     ui->ass2->setCurrentIndex(0);
     ui->ass3->setCurrentIndex(0);
 
+    ui->parentType1->setCurrentIndex(0);
+    ui->parentType2->setCurrentIndex(0);
+
+    ui->parent1->clear();
+    ui->parent2->clear();
+
     ui->incom->setChecked(false);
     ui->inv->setChecked(false);
     ui->migr->setChecked(false);
@@ -356,11 +383,6 @@ void MainWindow::cleaner()
 // ============================================================
 
 void MainWindow::help()
-{
-
-}
-
-void MainWindow::programInfo()
 {
 
 }

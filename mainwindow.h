@@ -15,6 +15,8 @@
 #include <QSettings>
 #include <QtDebug>
 
+#include <info.h>
+
 namespace Ui {
 class MainWindow;
 }
@@ -34,15 +36,18 @@ private:
     QRegularExpression *names;
     QRegularExpression *words;
 
+    info *MyInfo;
+
     void cleaner();
     void getDataAss(QStringList* qsl, QComboBox* comboBox);
     QString getDataCheckBox(QCheckBox* checkBox);
+
+    void replaceBoolData(QString* mainstr, QString dataname, QString data);
 
 private slots:
     void saveInfo();
     void clearForm();
     void help();
-    void programInfo();
 
 };
 
