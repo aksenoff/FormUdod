@@ -14,6 +14,7 @@
 #include <QComboBox>
 #include <QSettings>
 #include <QtDebug>
+#include <QDate>
 
 #include <info.h>
 

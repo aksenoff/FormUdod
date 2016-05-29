@@ -99,6 +99,12 @@ void MainWindow::saveInfo()
         QString docType = ui->docType->currentText();
         QString gender = ui->gender->currentText();
 
+        QDate currentDate;
+        QString strCurrentDate = currentDate.currentDate().toString(Qt::SystemLocaleShortDate);
+        // В данный момент дата устанавливается в формате ДД.ММ.ГГГГ
+        // Подумать над тем, как её нужно задавать
+        qDebug()<<strCurrentDate;
+
         if (surname == "" || name == "" || docNum == "" || schoolNum == "" || phone == "" || docType == "" || gender == "" || (ui->ass1->currentIndex() == 0 && ui->ass2->currentIndex() == 0 && ui->ass3->currentIndex() == 0))
         {
             // Если одно или несколько обязательных полей не заполнены
@@ -141,6 +147,8 @@ void MainWindow::saveInfo()
         QString needy = getDataCheckBox(ui->needy);
         QString health = getDataCheckBox(ui->health);
         QString orph = getDataCheckBox(ui->orph);
+
+
 
         bool isName = true;
         bool isSurname = true;
@@ -186,10 +194,10 @@ void MainWindow::saveInfo()
         {
             QString strQuery = "INSERT INTO Учащийся (";
             strQuery.append("`Фамилия`, `Имя`, `Отчество`, `Тип документа`, `Номер документа`, `Пол`, `Дата рождения`, `Район школы`, `Школа`, `Класс`, `Родители`, `Домашний адрес`, `Телефон`, ");
-            strQuery.append("`e-mail`, `С ослабленным здоровьем`, `Сирота`, `Инвалид`, `На учёте в полиции`, `Многодетная семья`, `Неполная семья`, `Малообеспеченная семья`, `Мигранты`) VALUES ('");
+            strQuery.append("`e-mail`, `С ослабленным здоровьем`, `Сирота`, `Инвалид`, `На учёте в полиции`, `Многодетная семья`, `Неполная семья`, `Малообеспеченная семья`, `Мигранты`, `Дата заявления`) VALUES ('");
             strQuery.append(surname + "', '" + name  + "', '" + patrname  + "', '" + docType  + "', '" + docNum  + "', '" + gender  + "', '" + birthday  + "', '");
             strQuery.append(schoolArea  + "', '" + schoolNum  + "', '" + classNum  + "', '" + parents  + "', '" + address  + "', '" + phone  + "', '" + mail + "', '");
-            strQuery.append(health  + "', '" + orph  + "', '" + inv  + "', '" + police  + "', '" + large  + "', '" + incom  + "', '" + needy  + "', '" + migr + "');");
+            strQuery.append(health  + "', '" + orph  + "', '" + inv  + "', '" + police  + "', '" + large  + "', '" + incom  + "', '" + needy  + "', '" + migr + "', '" + strCurrentDate + "');");
 
             QSqlQuery query;
             query.exec(strQuery);
@@ -348,7 +356,6 @@ void MainWindow::cleaner()
     ui->phone->clear();
     ui->mail->clear();
 
-    //ui->parents->clear();
     ui->address->clear();
 
     ui->docType->setCurrentIndex(0);
