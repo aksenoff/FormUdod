@@ -75,6 +75,8 @@ MainWindow::~MainWindow()
     if (myDB.isOpen())
         myDB.close();
 
+    delete MyInfo;
+
     delete names;
     delete words;
     delete ui;
@@ -238,12 +240,19 @@ void MainWindow::saveInfo()
 
             declaration.replace("%parent1_type%", ui->parentType1->currentText());
             declaration.replace("%parent1%", ui->parent1->text().simplified());
+            declaration.replace("%parent2_type%", ui->parentType2->currentText());
+            declaration.replace("%parent2%", ui->parent2->text().simplified());
+
             declaration.replace("%birthday%", birthday);
             declaration.replace("%classNum%", classNum);
             declaration.replace("%schoolNum%", schoolNum);
             declaration.replace("%schoolArea%", schoolArea);
             declaration.replace("%address%", address);
             declaration.replace("%phone%", phone);
+            declaration.replace("%email%", mail);
+            declaration.replace("%doctype%", docType);
+            declaration.replace("%docnum%", docNum);
+            declaration.replace("%сurrentDate%", strCurrentDate);
 
             QString ass;
             for (int i = 1; i<=qsl.size(); i++)
