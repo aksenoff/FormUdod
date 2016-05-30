@@ -138,8 +138,11 @@ void MainWindow::saveInfo()
         QString birthday;
 
         if (ui->bday->currentIndex() != 0 && ui->bmon->currentIndex() != 0)
-            birthday = ui->bday->currentText() + "." + ui->bmon->currentText() + "." + QString::number(ui->byear->value());
-
+        {
+            QDate bdate;
+            bdate.setDate(ui->byear->value(), ui->bmon->currentText().toInt(), ui->bday->currentText());
+            birthday.append(bdate.toString(Qt::SystemLocaleShortDate));
+        }
 
         QString police = getDataCheckBox(ui->police);
         QString inv = getDataCheckBox(ui->inv);
