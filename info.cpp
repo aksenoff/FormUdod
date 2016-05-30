@@ -8,6 +8,23 @@ info::info(QWidget *parent) :
     ui->setupUi(this);
     this->setWindowTitle(tr("Информация о программе"));
 
+    QString orgName;
+    QSettings settings ("Other/config.ini", QSettings::IniFormat);
+    settings.beginGroup("Settings");
+    orgName.append(settings.value("orgname").toString());
+    settings.endGroup();
+
+    if(!orgName.isEmpty())
+    {
+        orgName.prepend(" ");
+        orgName.append(" ");
+    }
+
+    ui->programText->setHtml("Программа предназначена для записи в объединения, входящие в состав учреждения дополнительного образования" + orgName + ".<br /><br />"
+                           "<strong>Разработчик:</strong><br />"
+                           "<a href=https://github.com/Domerk>Domerk</a><br /><br />"
+                           "<strong>Благодарности:</strong><br />"
+                           "<a href=https://github.com/aksenoff>Alex Aksenoff</a>, <a href=https://github.com/aizenbit>Alex Aizenbit</a>");
 
     ui->licenseText->setHtml(tr("The MIT License (MIT)"
                                 "<br /><br />Copyright © 2016 Domerk"

@@ -23,6 +23,11 @@
       <attribute name="title">
        <string>О программе</string>
       </attribute>
+      <layout class="QHBoxLayout" name="horizontalLayout">
+       <item>
+        <widget class="QTextEdit" name="programText"/>
+       </item>
+      </layout>
      </widget>
      <widget class="QWidget" name="tab2">
       <attribute name="title">
