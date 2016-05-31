@@ -34,7 +34,6 @@ MainWindow::MainWindow(QWidget *parent) :
     layout->addWidget(textEdit);
     layout->addWidget(button);
     help->setLayout(layout);
-    help->setBaseSize(400, 400);
 
     // --------------------------- Main ToolBar ----------------------------
 
@@ -122,12 +121,6 @@ void MainWindow::saveInfo()
         QString docType = ui->docType->currentText();
         QString gender = ui->gender->currentText();
 
-        QDate currentDate;
-        QString strCurrentDate = currentDate.currentDate().toString(Qt::SystemLocaleShortDate);
-        // В данный момент дата устанавливается в формате ДД.ММ.ГГГГ
-        // Подумать над тем, как её нужно задавать
-        qDebug()<<strCurrentDate;
-
         if (surname == "" || name == "" || docNum == "" || schoolNum == "" || phone == "" || docType == "" || gender == "" || (ui->ass1->currentIndex() == 0 && ui->ass2->currentIndex() == 0 && ui->ass3->currentIndex() == 0))
         {
             // Если одно или несколько обязательных полей не заполнены
@@ -142,6 +135,9 @@ void MainWindow::saveInfo()
             // Выходим
             return;
         }
+
+        QDate currentDate;
+        QString strCurrentDate = currentDate.currentDate().toString(Qt::SystemLocaleShortDate);
 
         QString patrname = ui->patrname->text().simplified().replace(QRegularExpression("-{2,}"), "-");
         QString schoolArea = ui->schoolArea->text().simplified().replace(QRegularExpression("-{2,}"), "-");
@@ -174,8 +170,6 @@ void MainWindow::saveInfo()
         QString health = getDataCheckBox(ui->health);
         QString orph = getDataCheckBox(ui->orph);
 
-
-
         bool isName = true;
         bool isSurname = true;
         bool isPatrName = true;
@@ -204,7 +198,6 @@ void MainWindow::saveInfo()
             return;
         }
 
-
         // Создаём окно, запрашивающее подтверждение действия
         QMessageBox messageBox(QMessageBox::Question,
                     tr("Сохранение"),
@@ -227,10 +220,6 @@ void MainWindow::saveInfo()
 
             QSqlQuery query;
             query.exec(strQuery);
-
-            qDebug() << strQuery;
-            //qDebug() << query.lastError().toString();
-
             strQuery.clear();
 
             QStringList qsl;
@@ -295,8 +284,6 @@ void MainWindow::saveInfo()
             else
                 declaration.replace("%health%", "Нет");
 
-            qDebug() << declaration;
-
             QString filename = surname + "_" + name + "_" + docNum + ".html";
             QFile file2(filename);
             if(file2.open(QIODevice::WriteOnly))
@@ -310,7 +297,6 @@ void MainWindow::saveInfo()
 
             cleaner();
         }
-
     }
     else
     {
@@ -324,7 +310,6 @@ void MainWindow::saveInfo()
         messageBox.setButtonText(QMessageBox::Yes, tr("ОК"));
         messageBox.exec();
     }
-
 }
 
 // ============================================================
@@ -348,7 +333,6 @@ void MainWindow::clearForm()
     {
         cleaner();
     }
-
 }
 
 void MainWindow::getDataAss(QStringList* qsl, QComboBox* comboBox)

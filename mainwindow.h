@@ -13,7 +13,6 @@
 #include <QTextStream>
 #include <QComboBox>
 #include <QSettings>
-#include <QtDebug>
 #include <QDate>
 #include <QDialogButtonBox>
 
@@ -39,7 +38,6 @@ private:
     QRegularExpression *words;
 
     info *MyInfo;
-
     QDialog *help;
 
     void cleaner();
