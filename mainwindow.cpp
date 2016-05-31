@@ -140,7 +140,7 @@ void MainWindow::saveInfo()
         if (ui->bday->currentIndex() != 0 && ui->bmon->currentIndex() != 0)
         {
             QDate bdate;
-            bdate.setDate(ui->byear->value(), ui->bmon->currentText().toInt(), ui->bday->currentText());
+            bdate.setDate(ui->byear->value(), ui->bmon->currentText().toInt(), ui->bday->currentText().toInt());
             birthday.append(bdate.toString(Qt::SystemLocaleShortDate));
         }
 
