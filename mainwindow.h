@@ -15,6 +15,7 @@
 #include <QSettings>
 #include <QtDebug>
 #include <QDate>
+#include <QDialogButtonBox>
 
 #include <info.h>
 
@@ -39,6 +40,8 @@ private:
 
     info *MyInfo;
 
+    QDialog *help;
+
     void cleaner();
     void getDataAss(QStringList* qsl, QComboBox* comboBox);
     QString getDataCheckBox(QCheckBox* checkBox);
@@ -48,7 +51,6 @@ private:
 private slots:
     void saveInfo();
     void clearForm();
-    void help();
 
 };
 

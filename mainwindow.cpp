@@ -16,6 +16,26 @@ MainWindow::MainWindow(QWidget *parent) :
     this->setWindowTitle(settings.value("windowtile", "Запись в объединения").toString());
     settings.endGroup();
 
+    help = new QDialog();
+    help->setWindowTitle(tr("Помощь"));
+    QTextEdit* textEdit = new QTextEdit;
+    textEdit->setReadOnly(true);
+    textEdit->setHtml(tr("Данная программа представляет собой клиент для работы с базой данных. Перед началом работы убедитесь, что соединение с базой установлено — "
+                         "в нижней части окна программы должна появиться соответствующая надпись. <b>Если соединение отсутствует, обратитесь к системному администратору.</b><br /><br />"
+                         "Если соединение установлено, заполните анкету. <b>Обратите внимание, что поля, помеченные символом *, обязательны для заполнения!</b> "
+                         "Если одно или несколько обязательных полей не заполнено, то при попытке сохранения программа выдаст соответствующее сообщения, а данные сохранены не будут.<br /><br />"
+                         "Для сохранения введённых данных нажмите <img src=:/icons/Icons/save.png/ height=20> <b>Сохранить</b> на панели инструментов и подтвердите действие, нажав <b>Да</b> во всплывающем окне, "
+                         "либо нажмите <b>Нет</b> для его отмены.<br /><br />"
+                         "Для очистки всех полей нажмите <img src=:/icons/Icons/clear.png/ height=20> <b>Очистить форму</b>. Обратите внимание, что при этом все введённые данные будут потеряны!<br /><br />"
+                         "Для получения информации о программе и лицензии нажмите <img src=:/icons/Icons/info.png/ height=20> <b>О программе</b>.<br /><br />"
+                         "<b>Изменение настроек программы может осуществляться только системным администратором.</b>"));
+    QVBoxLayout* layout = new QVBoxLayout;
+    QDialogButtonBox* button = new QDialogButtonBox(QDialogButtonBox::Ok);
+    layout->addWidget(textEdit);
+    layout->addWidget(button);
+    help->setLayout(layout);
+    help->setBaseSize(400, 400);
+
     // --------------------------- Main ToolBar ----------------------------
 
     // Иконки: http://www.flaticon.com/packs/web-application-ui/4
@@ -23,7 +43,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->mainToolBar->addAction(QIcon(":/icons/Icons/save.png"), tr("Сохранить"), this, SLOT(saveInfo()));
     ui->mainToolBar->addAction(QIcon(":/icons/Icons/clear.png"), tr("Очистить форму"), this, SLOT(clearForm()));
     ui->mainToolBar->addSeparator();
-    ui->mainToolBar->addAction(QIcon(":/icons/Icons/help.png"), tr("Помощь"), this, SLOT(help()));
+    ui->mainToolBar->addAction(QIcon(":/icons/Icons/help.png"), tr("Помощь"), help, SLOT(show()));
     ui->mainToolBar->addAction(QIcon(":/icons/Icons/info.png"), tr("О программе"), MyInfo, SLOT(show()));
 
     names = new QRegularExpression("^[А-ЯЁ]{1}[а-яё]*(-[А-ЯЁ]{1}[а-яё]*)?$");
@@ -76,6 +96,7 @@ MainWindow::~MainWindow()
         myDB.close();
 
     delete MyInfo;
+    delete help;
 
     delete names;
     delete words;
@@ -400,13 +421,3 @@ void MainWindow::cleaner()
 // ============================================================
 // ============================================================
 // ============================================================
-
-void MainWindow::help()
-{
-
-}
-
-// ============================================================
-// ============================================================
-// ============================================================
-
