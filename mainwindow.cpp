@@ -18,6 +18,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     help = new QDialog();
     help->setWindowTitle(tr("Помощь"));
+    help->setWindowFlags(Qt::Window | Qt::WindowSystemMenuHint | Qt::WindowCloseButtonHint);
     QTextEdit* textEdit = new QTextEdit;
     textEdit->setReadOnly(true);
     textEdit->setHtml(tr("Данная программа представляет собой клиент для работы с базой данных. Перед началом работы убедитесь, что соединение с базой установлено — "
@@ -82,6 +83,8 @@ MainWindow::MainWindow(QWidget *parent) :
     myDB.setUserName(settings.value("username").toString());
     myDB.setPassword(settings.value("password").toString());
     settings.endGroup();
+
+    qDebug()<<myDB.databaseName();
 
     if (myDB.open() && !myDB.isOpenError() && myDB.isValid())                            // Открываем соединение
         ui->lblStatus->setText(tr("Соединение установлено")); // Выводим сообщение
@@ -220,6 +223,9 @@ void MainWindow::saveInfo()
 
             QSqlQuery query;
             query.exec(strQuery);
+
+            qDebug() << strQuery;
+
             strQuery.clear();
 
             QStringList qsl;
@@ -231,6 +237,10 @@ void MainWindow::saveInfo()
                 strQuery.append("INSERT INTO Запись (`Тип документа`, `Номер документа`, `Объединение`) VALUES ('");
                 strQuery.append(docType  + "', '" + docNum  + "', '" + newCours + "');");
                 query.exec(strQuery);
+
+                qDebug() << strQuery;
+                //qDebug() << query.lastError().text();
+
                 strQuery.clear();
             }
 

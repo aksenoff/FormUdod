@@ -15,6 +15,7 @@
 #include <QSettings>
 #include <QDate>
 #include <QDialogButtonBox>
+#include <QDebug>
 
 #include <info.h>
 
