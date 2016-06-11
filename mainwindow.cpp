@@ -7,16 +7,18 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    MyInfo = new info();
+    MyInfo = new info(this);
 
     // ------------------------- Всякая красота ----------------------------
 
     QSettings settings ("Other/config.ini", QSettings::IniFormat);
     settings.beginGroup("Settings");
-    this->setWindowTitle(settings.value("windowtile", "Запись в объединения").toString());
+    this->setWindowTitle("FormUdod - " + settings.value("windowtitle", "Запись в объединения").toString());
     settings.endGroup();
 
-    help = new QDialog();
+    this->setWindowIcon(QIcon(":/icons/Icons/udod"));
+
+    help = new QDialog(this);
     help->setWindowTitle(tr("Помощь"));
     help->setWindowFlags(Qt::Window | Qt::WindowSystemMenuHint | Qt::WindowCloseButtonHint);
     QTextEdit* textEdit = new QTextEdit;
@@ -390,7 +392,7 @@ void MainWindow::cleaner()
     ui->bday->setCurrentIndex(0);
     ui->bmon->setCurrentIndex(0);
 
-    ui->byear->clear();
+    ui->byear->setValue(2000);
 
     ui->ass1->setCurrentIndex(0);
     ui->ass2->setCurrentIndex(0);

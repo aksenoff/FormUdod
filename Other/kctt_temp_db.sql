@@ -5,9 +5,9 @@ DROP TABLE IF EXISTS Учащийся;
 
 CREATE TABLE Учащийся (
 -- Поля
-`Фамилия`			VARCHAR(60)		NOT NULL,
-`Имя`				VARCHAR(60)		NOT NULL,
-`Отчество`		    VARCHAR(60),
+`Фамилия`			VARCHAR(100)		NOT NULL,
+`Имя`				VARCHAR(100)		NOT NULL,
+`Отчество`		    VARCHAR(100),
 `Тип документа`	  	VARCHAR(60)		NOT NULL,
 `Номер документа`	VARCHAR(60)		NOT NULL,
 `Пол`			    VARCHAR(3)		NOT NULL,
@@ -17,8 +17,8 @@ CREATE TABLE Учащийся (
 `Школа`			    VARCHAR(60),
 `Класс`			    VARCHAR(5),
 
-`Родители`		    VARCHAR(200),
-`Домашний адрес`	VARCHAR(200),
+`Родители`		    VARCHAR(300),
+`Домашний адрес`	VARCHAR(300),
 `Телефон`   		VARCHAR(100),
 `e-mail`    		VARCHAR(100),
 
@@ -40,7 +40,7 @@ CREATE TABLE Запись(
 -- Поля
 `Тип документа`	  	VARCHAR(60)		NOT NULL,
 `Номер документа`	VARCHAR(60)		NOT NULL,
-`Объединение`		VARCHAR(60)		NOT NULL,
+`Объединение`		VARCHAR(100)	NOT NULL,
 -- Параметры
 PRIMARY KEY (`Тип документа`, `Номер документа`, `Объединение`),
 FOREIGN KEY (`Тип документа`, `Номер документа`)  REFERENCES Учащийся(`Тип документа`, `Номер документа`) ON DELETE CASCADE

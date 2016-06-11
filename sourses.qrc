@@ -4,5 +4,6 @@
         <file>Icons/clear.png</file>
         <file>Icons/info.png</file>
         <file>Icons/help.png</file>
+        <file>Icons/udod.png</file>
     </qresource>
 </RCC>
