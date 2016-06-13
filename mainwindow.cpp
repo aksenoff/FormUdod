@@ -53,27 +53,30 @@ MainWindow::MainWindow(QWidget *parent) :
 
     // Получение инфы обобъединениях
 
-    QFile file ("Other/association.txt");
-    if(file.open(QIODevice::ReadOnly))
+    QFile file ("Other/association.txt"); // Указываем название файла
+    if(file.open(QIODevice::ReadOnly)) // Открываем файл для чтения
     {
-        QTextStream stream(&file);
+        // Если файл успешно открыт
+        QTextStream stream(&file); // Создаём поток текстового ввода/вывода
         if(stream.status() == QTextStream::Ok)
         {
-            QStringList qsl;
+            // Если поток создан успешно
+            QStringList qsl; // Создаём список строк
             while (!stream.atEnd())
             {
+                // Считываем поочерёдно все строки, форматируя их
                 QString str = stream.readLine().simplified().replace(QRegularExpression("-{2,}"), "-");
+                // Если строка не пустая и не комментарий
                 if (!str.isEmpty() && str.at(0) != '#')
-                    qsl.append(str);
+                    qsl.append(str); // Заносим её в список
             }
-
-            qsl.sort();
-            qsl.prepend("- Не выбрано -");
-            ui->ass1->addItems(qsl);
+            qsl.sort(); // Сортируем список
+            qsl.prepend("- Не выбрано -"); // Добавляем 0й элемент
+            ui->ass1->addItems(qsl); // Устанавливаем текст для ComboBox
             ui->ass2->addItems(qsl);
             ui->ass3->addItems(qsl);
         }
-        file.close();
+        file.close(); // Закрываем файл
     }
 
     // ----------------------------- DataBase ------------------------------
@@ -130,7 +133,7 @@ void MainWindow::saveInfo()
         {
             // Если одно или несколько обязательных полей не заполнены
             // Сообщаем об этом пользователю
-            QMessageBox messageBox(QMessageBox::Information,
+            QMessageBox messageBox(QMessageBox::Warning,
                                    tr("Сохранение"),
                                    tr("Ошибка сохранения: Не заполнено одно или несколько обязательных полей!"),
                                    QMessageBox::Yes,
@@ -193,7 +196,7 @@ void MainWindow::saveInfo()
 
         if (!isName || !isSurname || !isPatrName)
         {
-            QMessageBox messageBox(QMessageBox::Information,
+            QMessageBox messageBox(QMessageBox::Warning,
                                    tr("Сохранение"),
                                    tr("Ошибка сохранения: Одно или несколько полей заполнены неверно!"),
                                    QMessageBox::Yes,
