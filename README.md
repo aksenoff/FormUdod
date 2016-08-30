@@ -17,5 +17,8 @@ FormUdod - это клиент для работы с базой данных, �
 #### Скриншот:
 ![FormUdod - Скриншот](https://cloud.githubusercontent.com/assets/6494262/18105002/75d3e578-6f06-11e6-8a9e-531e8928e2ee.PNG)
 
-[Скачать FormUdod](https://github.com/Domerk/FormUdod/releases "Скачать FormUdod")
-[Скачать UdoDB](https://github.com/Domerk/UdoDB/releases "Скачать UdoDB")
+----
+
+#### Загрузки:
+* [FormUdod](https://github.com/Domerk/FormUdod/releases "Скачать FormUdod")
+* [UdoDB](https://github.com/Domerk/UdoDB/releases "Скачать UdoDB")
