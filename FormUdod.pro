@@ -26,3 +26,5 @@ RESOURCES += \
     sourses.qrc
 
 CONFIG += c++11
+
+RC_ICONS = Icons\udod.ico
