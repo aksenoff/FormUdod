@@ -578,7 +578,7 @@
              </sizepolicy>
             </property>
             <property name="text">
-             <string>Родители (законные представители)</string>
+             <string>Родители (законные представители) *</string>
             </property>
            </widget>
           </item>

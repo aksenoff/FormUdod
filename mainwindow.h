@@ -5,6 +5,7 @@
 #include <QtSql/QSql>
 #include <QtSql/QSqlDatabase>
 #include <QtSql/QSqlQuery>
+#include <QtSql/QSqlError>
 #include <QFile>
 #include <QFileInfo>
 #include <QMessageBox>

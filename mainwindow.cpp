@@ -81,20 +81,22 @@ MainWindow::MainWindow(QWidget *parent) :
 
     // ----------------------------- DataBase ------------------------------
 
-    myDB = QSqlDatabase::addDatabase("QSQLITE");    // Указываем СУБД
+    myDB = QSqlDatabase::addDatabase("QMYSQL");    // Указываем СУБД
     settings.beginGroup("Database");
     myDB.setHostName(settings.value("hostname", "localhost").toString());
     myDB.setDatabaseName(settings.value("dbname", "kcttTempDB").toString());
+    myDB.setPort(settings.value("port").toInt());
     myDB.setUserName(settings.value("username").toString());
     myDB.setPassword(settings.value("password").toString());
     settings.endGroup();
 
-    qDebug()<<myDB.databaseName();
-
+    QString status;
     if (myDB.open() && !myDB.isOpenError() && myDB.isValid())                            // Открываем соединение
-        ui->lblStatus->setText(tr("Соединение установлено")); // Выводим сообщение
+        status = tr("Соединение с базой установлено.");
     else
-        ui->lblStatus->setText(tr("Ошибка соединения: соединение не установлено"));
+        status = tr("Ошибка соединения с основной базой: ") + myDB.lastError().text();
+
+    ui->lblStatus->setText(status);
 }
 
 MainWindow::~MainWindow()
@@ -194,7 +196,7 @@ void MainWindow::saveInfo()
             isPatrName = match.hasMatch();
         }
 
-        if (!isName || !isSurname || !isPatrName)
+        if (!isName || !isSurname || !isPatrName || ui->parentType1->currentIndex() == 0 || ui->parentType2->currentIndex() == 0)
         {
             QMessageBox messageBox(QMessageBox::Warning,
                                    tr("Сохранение"),
@@ -228,9 +230,6 @@ void MainWindow::saveInfo()
 
             QSqlQuery query;
             query.exec(strQuery);
-
-            qDebug() << strQuery;
-
             strQuery.clear();
 
             QStringList qsl;
@@ -242,10 +241,6 @@ void MainWindow::saveInfo()
                 strQuery.append("INSERT INTO Запись (`Тип документа`, `Номер документа`, `Объединение`) VALUES ('");
                 strQuery.append(docType  + "', '" + docNum  + "', '" + newCours + "');");
                 query.exec(strQuery);
-
-                qDebug() << strQuery;
-                //qDebug() << query.lastError().text();
-
                 strQuery.clear();
             }
 
