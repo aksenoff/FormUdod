@@ -34,6 +34,7 @@ MainWindow::MainWindow(QWidget *parent) :
                          "<b>Изменение настроек программы может осуществляться только системным администратором.</b>"));
     QVBoxLayout* layout = new QVBoxLayout;
     QDialogButtonBox* button = new QDialogButtonBox(QDialogButtonBox::Ok);
+    connect(button, SIGNAL(accepted()), help, SLOT(close()));
     layout->addWidget(textEdit);
     layout->addWidget(button);
     help->setLayout(layout);
