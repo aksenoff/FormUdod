@@ -196,7 +196,7 @@ void MainWindow::saveInfo()
             isPatrName = match.hasMatch();
         }
 
-        if (!isName || !isSurname || !isPatrName || ui->parentType1->currentIndex() == 0 || ui->parentType2->currentIndex() == 0)
+        if (!isName || !isSurname || !isPatrName || (ui->parentType1->currentIndex() == 0 && ui->parentType2->currentIndex() == 0))
         {
             QMessageBox messageBox(QMessageBox::Warning,
                                    tr("Сохранение"),
