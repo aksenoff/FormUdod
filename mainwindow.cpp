@@ -226,8 +226,8 @@ void MainWindow::saveInfo()
             strQuery.append("`Фамилия`, `Имя`, `Отчество`, `Тип документа`, `Номер документа`, `Пол`, `Дата рождения`, `Район школы`, `Школа`, `Класс`, `Родители`, `Домашний адрес`, `Телефон`, ");
             strQuery.append("`e-mail`, `С ослабленным здоровьем`, `Сирота`, `Инвалид`, `На учёте в полиции`, `Многодетная семья`, `Неполная семья`, `Малообеспеченная семья`, `Мигранты`, `Дата заявления`) VALUES ('");
             strQuery.append(surname + "', '" + name  + "', '" + patrname  + "', '" + docType  + "', '" + docNum  + "', '" + gender  + "', '" + birthday  + "', '");
-            strQuery.append(schoolArea  + "', '" + schoolNum  + "', '" + classNum  + "', '" + parents  + "', '" + address  + "', '" + phone  + "', '" + mail + "', '");
-            strQuery.append(health  + "', '" + orph  + "', '" + inv  + "', '" + police  + "', '" + large  + "', '" + incom  + "', '" + needy  + "', '" + migr + "', '" + strCurrentDate + "');");
+            strQuery.append(schoolArea  + "', '" + schoolNum  + "', '" + classNum  + "', '" + parents  + "', '" + address  + "', '" + phone  + "', '" + mail + "', ");
+            strQuery.append(health  + ", " + orph  + ", " + inv  + ", " + police  + ", " + large  + ", " + incom  + ", " + needy  + ", " + migr + ", '" + strCurrentDate + "');");
 
             QSqlQuery query;
             query.exec(strQuery);
