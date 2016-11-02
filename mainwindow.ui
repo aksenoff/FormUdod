@@ -953,6 +953,39 @@
   </widget>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
+ <tabstops>
+  <tabstop>scrollArea</tabstop>
+  <tabstop>surname</tabstop>
+  <tabstop>name</tabstop>
+  <tabstop>patrname</tabstop>
+  <tabstop>docType</tabstop>
+  <tabstop>docNum</tabstop>
+  <tabstop>gender</tabstop>
+  <tabstop>bday</tabstop>
+  <tabstop>bmon</tabstop>
+  <tabstop>byear</tabstop>
+  <tabstop>schoolArea</tabstop>
+  <tabstop>schoolNum</tabstop>
+  <tabstop>classNum</tabstop>
+  <tabstop>parentType1</tabstop>
+  <tabstop>parent1</tabstop>
+  <tabstop>parentType2</tabstop>
+  <tabstop>parent2</tabstop>
+  <tabstop>address</tabstop>
+  <tabstop>phone</tabstop>
+  <tabstop>mail</tabstop>
+  <tabstop>health</tabstop>
+  <tabstop>inv</tabstop>
+  <tabstop>orph</tabstop>
+  <tabstop>incom</tabstop>
+  <tabstop>large</tabstop>
+  <tabstop>needy</tabstop>
+  <tabstop>police</tabstop>
+  <tabstop>migr</tabstop>
+  <tabstop>ass1</tabstop>
+  <tabstop>ass2</tabstop>
+  <tabstop>ass3</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>
