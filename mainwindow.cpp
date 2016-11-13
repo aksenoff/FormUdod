@@ -148,7 +148,7 @@ void MainWindow::saveInfo()
         }
 
         QDate currentDate;
-        QString strCurrentDate = currentDate.currentDate().toString(Qt::SystemLocaleShortDate);
+        QString strCurrentDate = currentDate.currentDate().toString(Qt::ISODate);
 
         QString patrname = ui->patrname->text().simplified().replace(QRegularExpression("-{2,}"), "-");
         QString schoolArea = ui->schoolArea->text().simplified().replace(QRegularExpression("-{2,}"), "-");
@@ -169,7 +169,7 @@ void MainWindow::saveInfo()
         {
             QDate bdate;
             bdate.setDate(ui->byear->value(), ui->bmon->currentText().toInt(), ui->bday->currentText().toInt());
-            birthday.append(bdate.toString(Qt::SystemLocaleShortDate));
+            birthday.append(bdate.toString(Qt::ISODate));
         }
 
         QString police = getDataCheckBox(ui->police);
