@@ -230,19 +230,43 @@ void MainWindow::saveInfo()
             strQuery.append(health  + ", " + orph  + ", " + inv  + ", " + police  + ", " + large  + ", " + incom  + ", " + needy  + ", " + migr + ", '" + strCurrentDate + "');");
 
             QSqlQuery query;
-            query.exec(strQuery);
-            strQuery.clear();
-
             QStringList qsl;
             getDataAss(&qsl, ui->ass1);
             getDataAss(&qsl, ui->ass2);
             getDataAss(&qsl, ui->ass3);
-            for (QString & newCours : qsl)
+
+            if (query.exec(strQuery))
             {
-                strQuery.append("INSERT INTO Запись (`Тип документа`, `Номер документа`, `Объединение`) VALUES ('");
-                strQuery.append(docType  + "', '" + docNum  + "', '" + newCours + "');");
-                query.exec(strQuery);
                 strQuery.clear();
+                for (QString & newCours : qsl)
+                {
+                    strQuery.append("INSERT INTO Запись (`Тип документа`, `Номер документа`, `Объединение`) VALUES ('");
+                    strQuery.append(docType  + "', '" + docNum  + "', '" + newCours + "');");
+                    if (!query.exec(strQuery))
+                    {
+                        // Если запрос не выполнился, выводим сообщение об ошибке
+                        QMessageBox messageBox(QMessageBox::Warning,
+                                               tr("Ошибка выполнения запроса"),
+                                               tr("В ходе выполнения запроса на добавление в объединение ") + newCours + tr(" возникла ошибка: ") + query.lastError().text(),
+                                               QMessageBox::Yes,
+                                               this);
+                        messageBox.setButtonText(QMessageBox::Yes, tr("ОК"));
+                        messageBox.exec();
+                    }
+                    strQuery.clear();
+                }
+            }
+            else
+            {
+                // Если запрос не выполнился, выводим сообщение об ошибке
+                QMessageBox messageBox(QMessageBox::Warning,
+                                       tr("Ошибка выполнения запроса"),
+                                       tr("В ходе выполнения запроса возникла ошибка: ") + query.lastError().text(),
+                                       QMessageBox::Yes,
+                                       this);
+                messageBox.setButtonText(QMessageBox::Yes, tr("ОК"));
+                messageBox.exec();
+                return; // Выходим вообще
             }
 
             // ------------------------------------------
