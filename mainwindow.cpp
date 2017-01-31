@@ -132,7 +132,7 @@ void MainWindow::saveInfo()
         QString docType = ui->docType->currentText();
         QString gender = ui->gender->currentText();
 
-        if (surname == "" || name == "" || docNum == "" || schoolNum == "" || phone == "" || docType == "" || gender == "" || (ui->ass1->currentIndex() == 0 && ui->ass2->currentIndex() == 0 && ui->ass3->currentIndex() == 0))
+        if (surname == "" || name == "" || docNum == "" || schoolNum == "" || phone == "" || docType == "" || gender == "" || (ui->ass1->currentIndex() == 0 && ui->ass2->currentIndex() == 0 && ui->ass3->currentIndex() == 0) || ui->gender->currentIndex() == 0)
         {
             // Если одно или несколько обязательных полей не заполнены
             // Сообщаем об этом пользователю
@@ -201,7 +201,7 @@ void MainWindow::saveInfo()
             isPatrName = match.hasMatch();
         }
 
-        if (!isName || !isSurname || !isPatrName || (ui->parentType1->currentIndex() == 0 && ui->parentType2->currentIndex() == 0))
+        if (!isName || !isSurname || !isPatrName || (ui->parentType1->currentIndex() == 0 && ui->parentType2->currentIndex() == 0) || ((ui->ass1->currentIndex() == ui->ass2->currentIndex()  || ui->ass1->currentIndex() == ui->ass3->currentIndex()) && ui->ass1->currentIndex()!=0) || (ui->ass2->currentIndex() == ui->ass3->currentIndex() && ui->ass2->currentIndex()!=0))
         {
             QMessageBox messageBox(QMessageBox::Warning,
                                    tr("Сохранение"),
