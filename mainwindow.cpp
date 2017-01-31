@@ -169,7 +169,11 @@ void MainWindow::saveInfo()
         {
             QDate bdate;
             bdate.setDate(ui->byear->value(), ui->bmon->currentText().toInt(), ui->bday->currentText().toInt());
-            birthday.append(bdate.toString(Qt::ISODate));
+            birthday.append("'" + bdate.toString(Qt::ISODate) + "'");
+        }
+        else
+        {
+            birthday = "NULL";
         }
 
         QString police = getDataCheckBox(ui->police);
@@ -225,7 +229,7 @@ void MainWindow::saveInfo()
             QString strQuery = "INSERT INTO Учащийся (";
             strQuery.append("`Фамилия`, `Имя`, `Отчество`, `Тип документа`, `Номер документа`, `Пол`, `Дата рождения`, `Район школы`, `Школа`, `Класс`, `Родители`, `Домашний адрес`, `Телефон`, ");
             strQuery.append("`e-mail`, `С ослабленным здоровьем`, `Сирота`, `Инвалид`, `На учёте в полиции`, `Многодетная семья`, `Неполная семья`, `Малообеспеченная семья`, `Мигранты`, `Дата заявления`) VALUES ('");
-            strQuery.append(surname + "', '" + name  + "', '" + patrname  + "', '" + docType  + "', '" + docNum  + "', '" + gender  + "', '" + birthday  + "', '");
+            strQuery.append(surname + "', '" + name  + "', '" + patrname  + "', '" + docType  + "', '" + docNum  + "', '" + gender  + "', " + birthday  + ", '");
             strQuery.append(schoolArea  + "', '" + schoolNum  + "', '" + classNum  + "', '" + parents  + "', '" + address  + "', '" + phone  + "', '" + mail + "', ");
             strQuery.append(health  + ", " + orph  + ", " + inv  + ", " + police  + ", " + large  + ", " + incom  + ", " + needy  + ", " + migr + ", '" + strCurrentDate + "');");
 
